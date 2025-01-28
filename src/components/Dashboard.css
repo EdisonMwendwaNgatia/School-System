@@ -1,0 +1,160 @@
+.dashboard {
+    padding: 2rem;
+    max-width: 1400px;
+    margin: 0 auto;
+    background-color: #f8f9fa;
+    min-height: 100vh;
+  }
+  
+  .dashboard h2 {
+    color: #2c3e50;
+    margin-bottom: 2rem;
+    font-size: 2rem;
+    font-weight: 600;
+  }
+  
+  .controls {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 2rem;
+    flex-wrap: wrap;
+  }
+  
+  .controls input {
+    flex: 1;
+    min-width: 200px;
+    padding: 0.75rem 1rem;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+  }
+  
+  .controls input:focus {
+    outline: none;
+    border-color: #3498db;
+    box-shadow: 0 0 0 2px rgba(52, 152, 219, 0.2);
+  }
+  
+  .controls button {
+    padding: 0.75rem 1.5rem;
+    background: #3498db;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 500;
+    transition: all 0.3s ease;
+  }
+  
+  .controls button:hover {
+    background: #2980b9;
+    transform: translateY(-2px);
+  }
+  
+  .student-table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    background: white;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+  
+  .student-table th {
+    background: #f1f2f6;
+    padding: 1rem;
+    text-align: left;
+    font-weight: 600;
+    color: #2c3e50;
+    border-bottom: 2px solid #e0e0e0;
+  }
+  
+  .student-table td {
+    padding: 1rem;
+    border-bottom: 1px solid #e0e0e0;
+    color: #444;
+  }
+  
+  .student-table tr:last-child td {
+    border-bottom: none;
+  }
+  
+  .student-table tr:hover {
+    background-color: #f8f9fa;
+  }
+  
+  .negative {
+    color: #e74c3c;
+    font-weight: 500;
+  }
+  
+  .positive {
+    color: #27ae60;
+    font-weight: 500;
+  }
+  
+  .sub-fees {
+    font-size: 0.85rem;
+    color: #666;
+    display: block;
+    margin-top: 0.25rem;
+  }
+  
+  td button {
+    padding: 0.5rem 1rem;
+    margin: 0.25rem;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: 500;
+    transition: all 0.2s ease;
+  }
+  
+  td button:first-child {
+    background: #3498db;
+    color: white;
+  }
+  
+  td button:first-child:hover {
+    background: #2980b9;
+  }
+  
+  .delete-button {
+    background: #fff;
+    color: #e74c3c;
+    border: 1px solid #e74c3c;
+  }
+  
+  .delete-button:hover {
+    background: #e74c3c;
+    color: white;
+  }
+  
+  @media (max-width: 1200px) {
+    .student-table {
+      display: block;
+      overflow-x: auto;
+      white-space: nowrap;
+    }
+    
+    .dashboard {
+      padding: 1rem;
+    }
+  }
+  
+  @media (max-width: 768px) {
+    .controls {
+      flex-direction: column;
+    }
+    
+    .controls input,
+    .controls button {
+      width: 100%;
+    }
+    
+    .dashboard h2 {
+      font-size: 1.5rem;
+    }
+  }
