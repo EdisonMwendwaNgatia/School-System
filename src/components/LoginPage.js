@@ -8,7 +8,7 @@ const LoginPage = ({ onLogin }) => {
   const navigate = useNavigate();
 
   const handleLogin = () => {
-    if (username === "admin" && password === "admin123") {
+    if (username === "Shalu" && password === "Shalu1991") {
       onLogin();
       navigate("/dashboard"); // Navigate to dashboard
     } else {
