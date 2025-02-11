@@ -1,0 +1,164 @@
+.lunch-fees-dashboard {
+    padding: 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  
+  .lunch-fees-dashboard h2 {
+    color: #2c3e50;
+    margin-bottom: 2rem;
+    font-size: 1.8rem;
+    border-bottom: 2px solid #eee;
+    padding-bottom: 1rem;
+  }
+  
+  .controls {
+    margin-bottom: 2rem;
+  }
+  
+  .controls input {
+    width: 100%;
+    max-width: 300px;
+    padding: 0.8rem;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 1rem;
+    transition: border-color 0.3s ease;
+  }
+  
+  .controls input:focus {
+    outline: none;
+    border-color: #3498db;
+    box-shadow: 0 0 0 2px rgba(52, 152, 219, 0.2);
+  }
+  
+  .student-table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    background: white;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+  .student-table th,
+  .student-table td {
+    padding: 1rem;
+    text-align: left;
+    border-bottom: 1px solid #eee;
+  }
+  
+  .student-table th {
+    background-color: #f8f9fa;
+    font-weight: 600;
+    color: #2c3e50;
+  }
+  
+  .student-table tr:last-child td {
+    border-bottom: none;
+  }
+  
+  .student-table tr:hover {
+    background-color: #f8f9fa;
+  }
+  
+  .student-table td button {
+    padding: 0.5rem 1rem;
+    background-color: #3498db;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .student-table td button:hover {
+    background-color: #2980b9;
+  }
+  
+  .negative {
+    color: #e74c3c;
+    font-weight: 500;
+  }
+  
+  .positive {
+    color: #2ecc71;
+    font-weight: 500;
+  }
+  
+  /* Loading state */
+  .student-table tr.loading {
+    opacity: 0.7;
+  }
+  
+  /* Empty state */
+  .student-table tr.empty-state td {
+    text-align: center;
+    padding: 2rem;
+    color: #7f8c8d;
+  }
+  
+  /* Responsive Design */
+  @media (max-width: 768px) {
+    .lunch-fees-dashboard {
+      padding: 1rem;
+    }
+  
+    .student-table {
+      display: block;
+      overflow-x: auto;
+      white-space: nowrap;
+    }
+  
+    .student-table th,
+    .student-table td {
+      padding: 0.8rem;
+    }
+  
+    .controls input {
+      max-width: 100%;
+    }
+  }
+  
+  /* Table Header Sticky on Scroll */
+  @media (min-width: 769px) {
+    .student-table thead th {
+      position: sticky;
+      top: 0;
+      background-color: #f8f9fa;
+      z-index: 1;
+    }
+  }
+  
+  /* Print Styles */
+  @media print {
+    .lunch-fees-dashboard {
+      padding: 0;
+    }
+  
+    .controls,
+    .student-table td button {
+      display: none;
+    }
+  
+    .student-table {
+      box-shadow: none;
+    }
+  
+    .student-table th,
+    .student-table td {
+      padding: 0.5rem;
+      border: 1px solid #ddd;
+    }
+  }
+  
+  /* Animation for row hover */
+  .student-table tr {
+    transition: background-color 0.2s ease;
+  }
+  
+  /* Zebra striping for better readability */
+  .student-table tbody tr:nth-child(even) {
+    background-color: #f9f9f9;
+  }

@@ -83,8 +83,16 @@ const Dashboard = () => {
     setStudents(updatedStudents);
   };
 
-  const filteredStudents = Object.entries(students).filter(([key]) =>
-    key.includes(search)
+  const handleNavigateToLunchFees = () => {
+    navigate("/lunchFees");
+  };
+
+  const handleNavigateToTracksuitFees = () => {
+    navigate("/tracksuitFees");
+  };
+
+  const filteredStudents = Object.entries(students).filter(([_, student]) =>
+    student.name.toLowerCase().includes(search.toLowerCase())
   );
 
   return (
@@ -93,67 +101,52 @@ const Dashboard = () => {
       <div className="controls">
         <input
           type="text"
-          placeholder="Search Admission Number"
+          placeholder="Search by Name"
           value={search}
           onChange={(e) => setSearch(e.target.value)}
         />
         <button onClick={handleAddStudent}>Add Student</button>
         <button className="reset-button" onClick={handleResetPayments}>Reset Payments</button>
+        <button className="lunch-button" onClick={handleNavigateToLunchFees}>Lunch Fees</button>
+        <button className="tracksuit-button" onClick={handleNavigateToTracksuitFees}>Tracksuit Fees</button>
       </div>
 
       <table className="student-table">
-        <thead>
-          <tr>
-            <th>Admission Number</th>
-            <th>Name</th>
-            <th>Tuition Balance</th>
-            <th>Lunch Balance</th>
-            <th>Tracksuit Balance</th>
-            <th>Actions</th>
-          </tr>
-        </thead>
-        <tbody>
-          {filteredStudents.map(([admissionNumber, student]) => {
-            const gradeFees = GRADE_FEES[student.grade] || GRADE_FEES["1-3"];
-            const tuitionBalance = student.tuitionPaid - gradeFees.tuition;
-            const lunchBalance = student.lunchPaid - gradeFees.lunch;
-            const tracksuitBalance = student.tracksuitPaid - gradeFees.tracksuit;
+  <thead>
+    <tr>
+      <th>UPI Number</th>
+      <th>Name</th>
+      <th>Paid Tuition</th> {/* New Column */}
+      <th>Tuition Balance</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    {filteredStudents.map(([admissionNumber, student]) => {
+      const gradeFees = GRADE_FEES[student.grade] || GRADE_FEES["1-3"];
+      const tuitionBalance = gradeFees.tuition - (student.tuitionPaid || 0);
 
-            const trouserBalance =
-              student.trouserPaid ? student.trouserPaid - (gradeFees.tracksuit / 2) : 0;
-            const peShirtBalance =
-              student.peShirtPaid ? student.peShirtPaid - (gradeFees.tracksuit / 2) : 0;
-
-            return (
-              <tr key={admissionNumber}>
-                <td>{admissionNumber}</td>
-                <td>{student.name}</td>
-                <td className={tuitionBalance < 0 ? "negative" : "positive"}>
-                  {tuitionBalance}
-                </td>
-                <td className={lunchBalance < 0 ? "negative" : "positive"}>
-                  {lunchBalance}
-                </td>
-                <td className={tracksuitBalance < 0 ? "negative" : "positive"}>
-                  {tracksuitBalance}
-                  <br />
-                  <span className="sub-fees">
-                    Trouser: {trouserBalance}, PE Shirt: {peShirtBalance}
-                  </span>
-                </td>
-                <td>
-                  <button onClick={() => handleSelectStudent(admissionNumber)}>
-                    Update Fees
-                  </button>
-                  <button className="delete-button" onClick={() => handleDelete(admissionNumber)}>
-                    Delete
-                  </button>
-                </td>
-              </tr>
-            );
-          })}
-        </tbody>
-      </table>
+      return (
+        <tr key={admissionNumber}>
+          <td>{admissionNumber}</td>
+          <td>{student.name}</td>
+          <td>{student.tuitionPaid || 0}</td> {/* Show Paid Fees */}
+          <td className={tuitionBalance < 0 ? "negative" : "positive"}>
+            {tuitionBalance}
+          </td>
+          <td>
+            <button onClick={() => handleSelectStudent(admissionNumber)}>
+              Update Fees
+            </button>
+            <button className="delete-button" onClick={() => handleDelete(admissionNumber)}>
+              Delete
+            </button>
+          </td>
+        </tr>
+      );
+    })}
+  </tbody>
+</table>
     </div>
   );
 };

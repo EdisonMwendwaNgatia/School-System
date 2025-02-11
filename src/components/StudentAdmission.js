@@ -28,7 +28,7 @@ const StudentAdmission = () => {
       <h2>Add Student</h2>
       <input
         type="text"
-        placeholder="Admission Number"
+        placeholder="UPI Number"
         value={admissionNumber}
         onChange={(e) => setAdmissionNumber(e.target.value)}
       />
