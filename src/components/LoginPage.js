@@ -17,7 +17,7 @@ const LoginPage = () => {
     e.preventDefault();
 
     // Mock authentication (replace with real authentication logic)
-    if (credentials.username === "admin" && credentials.password === "admin123") {
+    if (credentials.username === "Shalu" && credentials.password === "Shalu1991") {
       const token = "fake-jwt-token"; // Normally, you would get this from an API
       login(token); // Save token in localStorage and set authentication state
       navigate("/dashboard"); // Redirect to dashboard

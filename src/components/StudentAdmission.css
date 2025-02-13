@@ -1,93 +1,129 @@
 .student-admission {
-    max-width: 600px;
-    margin: 2rem auto;
-    padding: 2rem;
-    background: white;
-    border-radius: 12px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  max-width: 600px;
+  margin: 2rem auto;
+  padding: 2rem;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.student-admission h2 {
+  color: #2c3e50;
+  margin-bottom: 2rem;
+  font-size: 1.8rem;
+  font-weight: 600;
+  border-bottom: 2px solid #f0f0f0;
+  padding-bottom: 1rem;
+}
+
+.form-group {
+  margin-bottom: 1.5rem;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 0.5rem;
+  color: #2c3e50;
+  font-weight: 500;
+  font-size: 0.95rem;
+}
+
+.student-admission input,
+.student-admission select {
+  width: 100%;
+  padding: 0.75rem;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+  background-color: white;
+}
+
+.select-wrapper {
+  position: relative;
+}
+
+.select-wrapper::after {
+  content: '▼';
+  position: absolute;
+  right: 1rem;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #2c3e50;
+  pointer-events: none;
+  font-size: 0.8rem;
+}
+
+.student-admission select {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  cursor: pointer;
+}
+
+.student-admission input:focus,
+.student-admission select:focus {
+  outline: none;
+  border-color: #3498db;
+  box-shadow: 0 0 0 2px rgba(52, 152, 219, 0.2);
+}
+
+.student-admission input::placeholder {
+  color: #95a5a6;
+}
+
+.student-admission .button-group {
+  display: flex;
+  gap: 1rem;
+  margin-top: 2rem;
+  justify-content: flex-end;
+}
+
+.student-admission button {
+  padding: 0.75rem 2rem;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.student-admission button:first-child {
+  background: #f5f6fa;
+  color: #2c3e50;
+}
+
+.student-admission button:last-child {
+  background: #3498db;
+  color: white;
+}
+
+.student-admission button:first-child:hover {
+  background: #e1e4e8;
+  transform: translateY(-2px);
+}
+
+.student-admission button:last-child:hover {
+  background: #2980b9;
+  transform: translateY(-2px);
+}
+
+@media (max-width: 768px) {
+  .student-admission {
+    margin: 1rem;
+    padding: 1.5rem;
   }
-  
-  .student-admission h2 {
-    color: #2c3e50;
-    margin-bottom: 2rem;
-    font-size: 1.8rem;
-    font-weight: 600;
-    border-bottom: 2px solid #f0f0f0;
-    padding-bottom: 1rem;
-  }
-  
-  .student-admission input {
-    width: 100%;
-    padding: 0.75rem;
-    margin-bottom: 1rem;
-    border: 1px solid #e0e0e0;
-    border-radius: 8px;
-    font-size: 1rem;
-    transition: all 0.3s ease;
-  }
-  
-  .student-admission input:focus {
-    outline: none;
-    border-color: #3498db;
-    box-shadow: 0 0 0 2px rgba(52, 152, 219, 0.2);
-  }
-  
-  .student-admission input::placeholder {
-    color: #95a5a6;
-  }
-  
+
   .student-admission .button-group {
-    display: flex;
-    gap: 1rem;
-    margin-top: 2rem;
-    justify-content: flex-end;
+    flex-direction: column-reverse;
   }
-  
+
   .student-admission button {
-    padding: 0.75rem 2rem;
-    border: none;
-    border-radius: 8px;
-    font-size: 1rem;
-    font-weight: 500;
-    cursor: pointer;
-    transition: all 0.3s ease;
+    width: 100%;
   }
-  
-  .student-admission button:first-child {
-    background: #3498db;
-    color: white;
+
+  .student-admission h2 {
+    font-size: 1.5rem;
   }
-  
-  .student-admission button:first-child:hover {
-    background: #2980b9;
-    transform: translateY(-2px);
-  }
-  
-  .student-admission button:last-child {
-    background: #f5f6fa;
-    color: #2c3e50;
-  }
-  
-  .student-admission button:last-child:hover {
-    background: #e1e4e8;
-    transform: translateY(-2px);
-  }
-  
-  @media (max-width: 768px) {
-    .student-admission {
-      margin: 1rem;
-      padding: 1.5rem;
-    }
-  
-    .student-admission .button-group {
-      flex-direction: column-reverse;
-    }
-  
-    .student-admission button {
-      width: 100%;
-    }
-  
-    .student-admission h2 {
-      font-size: 1.5rem;
-    }
-  }
+}

@@ -3,27 +3,64 @@ import { useNavigate } from "react-router-dom";
 import { getStudents, deleteStudent, updateStudentFees } from "../services/FirebaseService";
 import "./Dashboard.css";
 
-const GRADE_FEES = {
-  "1-3": {
-    tuition: 11000,
-    lunch: 2000,
-    tracksuit: 1000,
+const TERM_FEES = {
+  TERM_1: {
+    "1-3": {
+      tuition: 12500,
+      lunch: 2000,
+      tracksuit: 1000,
+    },
+    "4-6": {
+      tuition: 15500,
+      lunch: 2000,
+      tracksuit: 1000,
+    },
+    "7-9": {
+      tuition: 19500,
+      lunch: 2000,
+      tracksuit: 1000,
+    },
   },
-  "4-6": {
-    tuition: 14000,
-    lunch: 2000,
-    tracksuit: 1000,
+  TERM_2: {
+    "1-3": {
+      tuition: 11500,
+      lunch: 2000,
+      tracksuit: 1000,
+    },
+    "4-6": {
+      tuition: 14500,
+      lunch: 2000,
+      tracksuit: 1000,
+    },
+    "7-9": {
+      tuition: 18500,
+      lunch: 2000,
+      tracksuit: 1000,
+    },
   },
-  "7-9": {
-    tuition: 18000,
-    lunch: 2000,
-    tracksuit: 1000,
+  TERM_3: {
+    "1-3": {
+      tuition: 11500,
+      lunch: 2000,
+      tracksuit: 1000,
+    },
+    "4-6": {
+      tuition: 14500,
+      lunch: 2000,
+      tracksuit: 1000,
+    },
+    "7-9": {
+      tuition: 18500,
+      lunch: 2000,
+      tracksuit: 1000,
+    },
   },
 };
 
 const Dashboard = () => {
   const [students, setStudents] = useState({});
   const [search, setSearch] = useState("");
+  const [selectedTerm, setSelectedTerm] = useState("TERM_1");
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -56,10 +93,18 @@ const Dashboard = () => {
 
   const handleResetPayments = async () => {
     const password = prompt("Enter admin password to reset payments:");
-    if (password !== "admin123") {
+    if (password !== "Shalu1991") {
       alert("Incorrect password!");
       return;
     }
+
+    const term = prompt("Enter the term (TERM_1, TERM_2, TERM_3):");
+    if (!TERM_FEES[term]) {
+      alert("Invalid term!");
+      return;
+    }
+
+    setSelectedTerm(term);
 
     const confirmReset = window.confirm("Are you sure you want to reset all payments to zero?");
     if (!confirmReset) {
@@ -70,16 +115,14 @@ const Dashboard = () => {
     for (const [admissionNumber, student] of Object.entries(students)) {
       updatedStudents[admissionNumber] = {
         ...student,
-        tuitionPaid: 0,
-        lunchPaid: 0,
-        tracksuitPaid: 0,
-        trouserPaid: 0,
-        peShirtPaid: 0,
-        payments: [],
+        tuitionPaid: 0, // Reset tuition payments
+        lunchPaid: 0,   // Reset lunch payments
+        //payments: [],   // Clear payment history
+        // Do not reset trouserPaid and peShirtPaid
       };
       await updateStudentFees(admissionNumber, updatedStudents[admissionNumber]);
     }
-    alert("All payments have been reset to zero.");
+    alert("All payments (except tracksuit payments) have been reset to zero.");
     setStudents(updatedStudents);
   };
 
@@ -94,6 +137,8 @@ const Dashboard = () => {
   const filteredStudents = Object.entries(students).filter(([_, student]) =>
     student.name.toLowerCase().includes(search.toLowerCase())
   );
+
+  const GRADE_FEES = TERM_FEES[selectedTerm];
 
   return (
     <div className="dashboard">
@@ -112,41 +157,41 @@ const Dashboard = () => {
       </div>
 
       <table className="student-table">
-  <thead>
-    <tr>
-      <th>UPI Number</th>
-      <th>Name</th>
-      <th>Paid Tuition</th> {/* New Column */}
-      <th>Tuition Balance</th>
-      <th>Actions</th>
-    </tr>
-  </thead>
-  <tbody>
-    {filteredStudents.map(([admissionNumber, student]) => {
-      const gradeFees = GRADE_FEES[student.grade] || GRADE_FEES["1-3"];
-      const tuitionBalance = gradeFees.tuition - (student.tuitionPaid || 0);
+        <thead>
+          <tr>
+            <th>UPI Number</th>
+            <th>Name</th>
+            <th>Paid Tuition</th>
+            <th>Tuition Balance</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          {filteredStudents.map(([admissionNumber, student]) => {
+            const gradeFees = GRADE_FEES[student.grade] || GRADE_FEES["1-3"];
+            const tuitionBalance = gradeFees.tuition - (student.tuitionPaid || 0);
 
-      return (
-        <tr key={admissionNumber}>
-          <td>{admissionNumber}</td>
-          <td>{student.name}</td>
-          <td>{student.tuitionPaid || 0}</td> {/* Show Paid Fees */}
-          <td className={tuitionBalance < 0 ? "negative" : "positive"}>
-            {tuitionBalance}
-          </td>
-          <td>
-            <button onClick={() => handleSelectStudent(admissionNumber)}>
-              Update Fees
-            </button>
-            <button className="delete-button" onClick={() => handleDelete(admissionNumber)}>
-              Delete
-            </button>
-          </td>
-        </tr>
-      );
-    })}
-  </tbody>
-</table>
+            return (
+              <tr key={admissionNumber}>
+                <td>{admissionNumber}</td>
+                <td>{student.name}</td>
+                <td>{student.tuitionPaid || 0}</td>
+                <td className={tuitionBalance < 0 ? "negative" : "positive"}>
+                  {tuitionBalance}
+                </td>
+                <td>
+                  <button onClick={() => handleSelectStudent(admissionNumber)}>
+                    Update Fees
+                  </button>
+                  <button className="delete-button" onClick={() => handleDelete(admissionNumber)}>
+                    Delete
+                  </button>
+                </td>
+              </tr>
+            );
+          })}
+        </tbody>
+      </table>
     </div>
   );
 };
