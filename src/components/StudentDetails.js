@@ -133,7 +133,7 @@ const StudentDetails = () => {
     doc.line(20, 147, 190, 147);
     
     const tableColumns = [
-      ["Date", "MPESA Code", "Network", "Amount (KES)"]
+      ["Date", "Confirmation Code/Payment Type", "Network/Payment Firm", "Amount (KES)"]
     ];
     
     const tableRows = student.payments
