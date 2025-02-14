@@ -117,7 +117,7 @@ const Dashboard = () => {
         ...student,
         tuitionPaid: 0, // Reset tuition payments
         lunchPaid: 0,   // Reset lunch payments
-        //payments: [],   // Clear payment history
+        payments: [],   // Clear payment history
         // Do not reset trouserPaid and peShirtPaid
       };
       await updateStudentFees(admissionNumber, updatedStudents[admissionNumber]);
