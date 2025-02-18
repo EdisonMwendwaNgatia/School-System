@@ -4,6 +4,7 @@ import { getStudents, deleteStudent, updateStudentFees } from "../services/Fireb
 import jsPDF from "jspdf";
 import "./Dashboard.css";
 
+
 const TERM_FEES = {
   TERM_1: {
     "1-3": { tuition: 12500 },
@@ -84,7 +85,7 @@ const Dashboard = () => {
         term: term,
         tuitionPaid: 0, // Reset tuition payments
         tuitionBalance: newBalance,
-        payments: [],   // Clear payment history
+        //payments: [],   // Clear payment history
       };
       await updateStudentFees(admissionNumber, updatedStudents[admissionNumber]);
     }
